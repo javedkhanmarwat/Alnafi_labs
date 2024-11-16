@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'alnafi-cicd', credentialsId: '634e2b44-56c2-4488-8b54-9c1202e84953', url: 'https://github.com/javedkhanmarwat/Alnafi_labs.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'python -m unittest discover'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying application..."'
+                // Add deployment steps here
+            }
+        }
+    }
+}
